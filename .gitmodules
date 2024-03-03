@@ -1,0 +1,6 @@
+[submodule "CppFreeMock"]
+	path = CppFreeMock
+	url = https://github.com/zadockmaloba/CppFreeMock
+[submodule "googletest"]
+	path = googletest
+	url = https://github.com/google/googletest
