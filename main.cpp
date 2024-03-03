@@ -9,7 +9,7 @@
 using namespace ::std;
 using namespace ::testing;
 
-
+//Mocking class
 struct TestMockStruct {
     string func0Parameter() {
         return "Non mocked.";
@@ -24,6 +24,7 @@ struct TestMockStruct {
 
 };
 
+//Test fixture used to configure the test suites
 struct TestMemberFunction : public ::testing::Test {
     virtual void SetUp() { }
     virtual void TearDown() {
@@ -31,6 +32,7 @@ struct TestMemberFunction : public ::testing::Test {
     }
 };
 
+//Test case to test CppFreeMock::RestoreToReal()
 TEST_F(TestMemberFunction, RestoreToReal) {
     TestMockStruct mockStruct;
     auto mocker = MOCKER(&TestMockStruct::func0Parameter);
@@ -42,6 +44,7 @@ TEST_F(TestMemberFunction, RestoreToReal) {
     EXPECT_EQ("Non mocked.", mockStruct.func0Parameter());
 }
 
+//Test case to test mocking of non-implemented functions
 TEST_F(TestMemberFunction, NonImplemented) {
     TestMockStruct mockStruct;
     auto mocker = MOCKER(&TestMockStruct::non_implementedFunc);
