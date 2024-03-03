@@ -1,6 +1,3 @@
-#include <iostream>
-#include <functional>
-
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
@@ -9,8 +6,7 @@
 using namespace ::std;
 using namespace ::testing;
 
-//Mocking class
-struct TestMockStruct {
+struct OriginalClass {
     string func0Parameter() {
         return "Non mocked.";
     }
@@ -19,8 +15,20 @@ struct TestMockStruct {
         return "Non mocked.";
     }
 
+    //non-implemented function
+    string non_implementedFunc();
+
+    //virtial function
+    virtual string non_implementedFunc2();
+};
+
+//Mocking class
+struct TestMockStruct: public OriginalClass {
+
     //Mock non-implemented function
     MOCK_METHOD(string, non_implementedFunc, ());
+    //Mock virtual non-implemented function
+    MOCK_METHOD(string, non_implementedFunc2, (), (override));
 
 };
 
